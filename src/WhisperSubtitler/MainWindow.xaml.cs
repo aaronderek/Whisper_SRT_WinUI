@@ -146,10 +146,18 @@ public sealed partial class MainWindow : Window
         if ((sender as FrameworkElement)?.DataContext is JobItem job &&
             !string.IsNullOrEmpty(job.OutputPath) && File.Exists(job.OutputPath))
         {
-            Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{job.OutputPath}\"")
+            // explorer 只认「/select,"路径"」这种引号写在参数内部的字符串形式：
+            // 用 ArgumentList 会被 .NET 把整个参数加引号，explorer 解析不了会退化成打开「文档」。
+            // Windows 文件名不允许半角引号，这里再剥离一次作为纵深防御，避免注入额外开关。
+            string safePath = job.OutputPath.Replace("\"", "");
+            try
             {
-                UseShellExecute = true
-            });
+                Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{safePath}\"")
+                {
+                    UseShellExecute = true
+                });
+            }
+            catch { /* 某些环境下资源管理器不可用时忽略 */ }
         }
     }
 

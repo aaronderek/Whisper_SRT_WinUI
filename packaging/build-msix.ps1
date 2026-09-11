@@ -160,7 +160,7 @@ try {
     Write-Host " 打包完成"
     Write-Host "   MSIX : $MsixPath"
     Write-Host "   证书 : $CerPath"
-    Write-Host " 下一步：右键 install-msix.bat -> 以管理员身份运行"
+    Write-Host " 下一步：双击 install-msix.bat（会先尝试不提权安装，仅在证书未受信任时申请一次提权）"
     Write-Host "==================================================================="
     "OK" | Set-Content -Path $ResultFile -Encoding UTF8
 }

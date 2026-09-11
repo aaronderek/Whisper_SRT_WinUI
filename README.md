@@ -135,16 +135,17 @@ msbuild WhisperSubtitler.sln /restore /t:Build /p:Configuration=Release /p:Platf
 
 ```powershell
 # 1) 打包：产出 packaging\build\WhisperSubtitler_<版本>_x64.msix 与测试证书
-.\packaging\build-msix.ps1 -Version 1.0.10.0
+.\packaging\build-msix.ps1 -Version 1.0.11.0
 
-# 2) 安装：右键 packaging\install-msix.bat -> 以管理员身份运行
-#    脚本会把 packaging\WhisperSubtitler_TestCert.cer 导入「本地计算机\受信任人」后安装
+# 2) 安装：双击 packaging\install-msix.bat
+#    脚本先尝试【不提权】安装；只有测试证书尚未受信任时才弹一次 UAC，
+#    且提权进程只做「导入证书」这一件事，不以管理员身份执行脚本文件
 ```
 
-证书已在受信任人里的机器上，也可以不提权直接装：
+证书已在受信任人里的机器（包括所有重复升级）全程不需要管理员：
 
 ```powershell
-Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.10.0_x64.msix -ForceUpdateFromAnyVersion
+Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.11.0_x64.msix -ForceUpdateFromAnyVersion
 ```
 
 > 新版本号必须高于已安装版本才能覆盖升级；`-ForceUpdateFromAnyVersion` 可以放宽这条限制。
@@ -161,6 +162,24 @@ Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.10.0_x64.msix -Forc
 
 后端还内置 `small` / `base` / `tiny`，可直接用命令行 `--model tiny` 指定。
 
+## 依赖与模型版本锁定
+
+出于供应链安全考虑，依赖与第三方模型都做了版本锁定（上游发新版不会被自动吃进）：
+
+- **Python 依赖**：`backend/requirements.txt` 锁定为实测跑通 GPU 转录的精确版本
+  （faster-whisper 1.2.1 · CTranslate2 4.8.1 · av 18.0.0 · cuBLAS 12.9.2.10 · cuDNN 9.24.0.43 · huggingface-hub 1.23.0），不再用 `>=` 浮动版本
+- **完整环境快照**：`backend/requirements.lock.txt` 是验证过的 28 个包（含传递依赖）的 `pip freeze`，需要完全复刻环境时用它：
+
+  ```powershell
+  .venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+  ```
+
+- **NuGet**：`Microsoft.WindowsAppSDK` 与 `CommunityToolkit.Mvvm` 均锁定精确版本
+- **模型 revision**：第三方（非 SYSTRAN 官方）模型仓库写死 git revision，上游权重被替换时不会静默生效：
+  - `large-v3-turbo` → `dropbox-dash/faster-whisper-large-v3-turbo`（该模型在 HF 上已从 `mobiuslabsgmbh` 改名，这里直接写规范仓库 id，不依赖旧名重定向）
+  - `distil-large-v3.5` → `deepdml/faster-distil-whisper-large-v3.5`
+  - SYSTRAN 官方仓库（`large-v3` / `distil-large-v3` / `medium` / `small` / `base` / `tiny`）跟随官方最新版，不做锁定
+
 ## 常见问题
 
 **Q：右上角一直是灰灯 / 提示“未找到 Python 环境”。**
@@ -176,7 +195,7 @@ Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.10.0_x64.msix -Forc
 先设镜像再启动应用：`set HF_ENDPOINT=https://hf-mirror.com`，或手动把模型放进 HuggingFace 缓存目录。
 
 **Q：安装时报证书不受信任。**
-先运行一次 `packaging\install-msix.bat`（管理员），它会把测试证书导入「本地计算机\受信任人」。
+运行一次 `packaging\install-msix.bat`：它只在需要导入测试证书时申请一次管理员权限，随后不提权完成安装。
 
 **Q：构建报 Windows App SDK / 运行时相关错误。**
 确认 VS 装了 Windows App SDK 工作负载；本工程已配置为自包含（`WindowsAppSDKSelfContained`），一般无需单独安装运行时。
@@ -188,7 +207,8 @@ Whisper SRT/
 ├─ WhisperSubtitler.sln
 ├─ backend/                     Python 转录后端（faster-whisper）
 │  ├─ transcribe.py             主脚本：--check 自检 / 转录并输出 SRT 或 TXT，stdout 发 JSON 进度
-│  ├─ requirements.txt          Blackwell 兼容依赖（CT2>=4.5, cuDNN9, cuBLAS12）
+│  ├─ requirements.txt          锁定版本的依赖（CT2 4.8.1, cuDNN9, cuBLAS12）
+│  ├─ requirements.lock.txt     验证过的完整环境快照（含传递依赖，可选）
 │  └─ setup.bat                 一键建 venv + 装依赖 + 自检
 ├─ src/WhisperSubtitler/        WinUI 3 前端（C#）
 │  ├─ MainWindow.xaml(.cs)      界面 + 文件选择/拖放/打开输出

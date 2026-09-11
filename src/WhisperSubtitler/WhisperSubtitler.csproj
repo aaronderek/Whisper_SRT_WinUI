@@ -21,8 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- 若还原失败，可在 NuGet 里把版本改成你环境可用的最新版 -->
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.*" />
+    <!-- 版本锁定（不用浮动版本），避免上游发布后被自动还原进来；升级时改这里并重新构建验证 -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250602001" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
 

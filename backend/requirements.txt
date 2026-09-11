@@ -1,14 +1,21 @@
 # faster-whisper 转录后端依赖
 # 目标硬件：RTX 50 系 (Blackwell / sm_120)，需要 CUDA 12 + cuDNN 9。
 #
+# 版本策略：全部锁定为**已在 Windows x64 / Python 3.11 实测跑通 GPU 转录**的精确版本。
+# 锁定可以避免上游发布新版后被自动装进来（供应链风险）。要升级时改这里的版本号，
+# 然后重跑一次 setup.bat 并做一次真实转录验证。
+#
 # 说明：
-#  - ctranslate2 >= 4.5.0 才包含对 Blackwell 的支持（修复 INT8 tensor core padding）。
-#  - nvidia-cublas-cu12 / nvidia-cudnn-cu12 提供 GPU 运行所需的 CUDA 12 运行库，
-#    transcribe.py 会在启动时自动把它们的 bin 目录加入 DLL 搜索路径。
-#  - av (PyAV) 内置 ffmpeg，可直接从视频中解码音轨，无需单独安装 ffmpeg.exe。
+#  - ctranslate2 >= 4.5.0 才包含 Blackwell 支持（INT8 tensor core padding 修复）。
+#  - nvidia-cublas-cu12 / nvidia-cudnn-cu12 提供 CUDA 12 运行库，
+#    transcribe.py 启动时会自动把它们的 bin 目录加入 DLL 搜索路径。
+#  - av (PyAV) 内置 ffmpeg，可直接从视频解码音轨，无需单独安装 ffmpeg.exe。
+#  - huggingface_hub 被 transcribe.py 直接 import（模型缓存查询 / 指定 revision 下载），
+#    因此显式声明，不依赖 faster-whisper 的传递依赖。
 
-faster-whisper>=1.1.0
-ctranslate2>=4.5.0
-av>=11.0.0
-nvidia-cublas-cu12>=12.4.0
-nvidia-cudnn-cu12>=9.1.0
+faster-whisper==1.2.1
+ctranslate2==4.8.1
+av==18.0.0
+huggingface-hub==1.23.0
+nvidia-cublas-cu12==12.9.2.10
+nvidia-cudnn-cu12==9.24.0.43

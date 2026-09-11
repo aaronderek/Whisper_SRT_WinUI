@@ -135,16 +135,18 @@ msbuild WhisperSubtitler.sln /restore /t:Build /p:Configuration=Release /p:Platf
 
 ```powershell
 # 1) Build: produces packaging\build\WhisperSubtitler_<version>_x64.msix plus the test cert
-.\packaging\build-msix.ps1 -Version 1.0.10.0
+.\packaging\build-msix.ps1 -Version 1.0.11.0
 
-# 2) Install: right-click packaging\install-msix.bat -> Run as administrator
-#    The script imports packaging\WhisperSubtitler_TestCert.cer into LocalMachine\TrustedPeople, then installs
+# 2) Install: double-click packaging\install-msix.bat
+#    It first tries to install WITHOUT elevation; only if the test certificate is not trusted yet
+#    does it raise one UAC prompt, and that elevated process does nothing but import the certificate
+#    (it never executes a script file as administrator)
 ```
 
-On a machine that already trusts the certificate, no elevation is needed:
+On a machine that already trusts the certificate (including every repeat upgrade) no elevation is needed:
 
 ```powershell
-Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.10.0_x64.msix -ForceUpdateFromAnyVersion
+Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.11.0_x64.msix -ForceUpdateFromAnyVersion
 ```
 
 > The new version must be higher than the installed one to update in place; `-ForceUpdateFromAnyVersion` relaxes that.
@@ -161,6 +163,24 @@ Add-AppxPackage -Path .\packaging\build\WhisperSubtitler_1.0.10.0_x64.msix -Forc
 
 The backend also accepts `small` / `base` / `tiny` via the command line (`--model tiny`).
 
+## Locked dependency and model versions
+
+For supply-chain safety, dependencies and third-party models are version-locked, so a new upstream release is never pulled in silently:
+
+- **Python deps**: `backend/requirements.txt` pins the exact versions this app was verified against on GPU
+  (faster-whisper 1.2.1 · CTranslate2 4.8.1 · av 18.0.0 · cuBLAS 12.9.2.10 · cuDNN 9.24.0.43 · huggingface-hub 1.23.0) instead of `>=` ranges
+- **Full environment snapshot**: `backend/requirements.lock.txt` is a `pip freeze` of the verified 28-package environment (transitive deps included):
+
+  ```powershell
+  .venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+  ```
+
+- **NuGet**: `Microsoft.WindowsAppSDK` and `CommunityToolkit.Mvvm` are pinned to exact versions
+- **Model revisions**: third-party (non-SYSTRAN) model repos have their git revision pinned, so replaced upstream weights cannot take effect silently:
+  - `large-v3-turbo` → `dropbox-dash/faster-whisper-large-v3-turbo` (the model was renamed on HF from `mobiuslabsgmbh`; the canonical repo id is used directly instead of relying on the old-name redirect)
+  - `distil-large-v3.5` → `deepdml/faster-distil-whisper-large-v3.5`
+  - SYSTRAN official repos (`large-v3` / `distil-large-v3` / `medium` / `small` / `base` / `tiny`) follow upstream and are not pinned
+
 ## FAQ
 
 **The status light stays grey / “Python environment not found”.**
@@ -176,7 +196,7 @@ Update the NVIDIA driver to one that supports CUDA 12.8, and make sure `nvidia-c
 Set a mirror before launching the app: `set HF_ENDPOINT=https://hf-mirror.com`, or copy the model into the HuggingFace cache folder manually.
 
 **Installing reports an untrusted certificate.**
-Run `packaging\install-msix.bat` once (as administrator) to import the test certificate into LocalMachine\TrustedPeople.
+Run `packaging\install-msix.bat` once; it asks for elevation only to import the test certificate into LocalMachine\TrustedPeople, then installs without elevation.
 
 **Build errors about Windows App SDK / runtime.**
 Make sure the Windows App SDK workload is installed in VS; this project is configured as self-contained (`WindowsAppSDKSelfContained`), so no separate runtime install is normally needed.
@@ -188,7 +208,8 @@ Whisper SRT/
 ├─ WhisperSubtitler.sln
 ├─ backend/                     Python transcription backend (faster-whisper)
 │  ├─ transcribe.py             Main script: --check, or transcribe to SRT/TXT with JSON progress on stdout
-│  ├─ requirements.txt          Blackwell-friendly deps (CT2>=4.5, cuDNN9, cuBLAS12)
+│  ├─ requirements.txt          Pinned deps (CT2 4.8.1, cuDNN9, cuBLAS12)
+│  ├─ requirements.lock.txt     Verified full environment snapshot (incl. transitive deps, optional)
 │  └─ setup.bat                 venv + deps + self-check in one go
 ├─ src/WhisperSubtitler/        WinUI 3 front end (C#)
 │  ├─ MainWindow.xaml(.cs)      UI, file pickers, drag & drop, open output

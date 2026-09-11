@@ -114,13 +114,24 @@ def prepare_cuda_dll_search_paths():
 # ---------------------------------------------------------------------------
 MODEL_MAP = {
     "large-v3": "large-v3",
-    "large-v3-turbo": "large-v3-turbo",
+    # 该模型在 HF 上已由 mobiuslabsgmbh 改名到 dropbox-dash。这里直接写规范仓库 id，
+    # 不走旧名的重定向：旧命名空间一旦被他人注册，带旧名的请求就会被接走。
+    "large-v3-turbo": "dropbox-dash/faster-whisper-large-v3-turbo",
     "distil-large-v3.5": "deepdml/faster-distil-whisper-large-v3.5",
     "distil-large-v3": "distil-large-v3",
     "medium": "medium",
     "small": "small",
     "base": "base",
     "tiny": "tiny",
+}
+
+# 第三方（非 SYSTRAN 官方）模型仓库锁定 revision：上游权重即使被替换也不会静默生效。
+# SYSTRAN 官方仓库不在此表内（跟随官方最新版）。升级模型时需同步更新这里。
+MODEL_PINS = {
+    "dropbox-dash/faster-whisper-large-v3-turbo":
+        "0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+    "deepdml/faster-distil-whisper-large-v3.5":
+        "3fc5a9a7e601a131caaaa09d91b653ed20643f60",
 }
 
 
@@ -131,7 +142,7 @@ def resolve_model(name):
 # 内置模型名 -> HuggingFace 仓库 id 的兜底映射（faster_whisper.utils._MODELS 不可用时）
 FALLBACK_REPOS = {
     "large-v3": "Systran/faster-whisper-large-v3",
-    "large-v3-turbo": "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+    "large-v3-turbo": "dropbox-dash/faster-whisper-large-v3-turbo",
     "distil-large-v3": "Systran/faster-distil-whisper-large-v3",
     "medium": "Systran/faster-whisper-medium",
     "small": "Systran/faster-whisper-small",
@@ -153,6 +164,11 @@ def repo_for(name):
     except Exception:
         pass
     return FALLBACK_REPOS.get(resolved, f"Systran/faster-whisper-{resolved}")
+
+
+def pinned_revision(name):
+    """该模型应锁定的 git revision；官方仓库不在锁定表内，返回 None。"""
+    return MODEL_PINS.get(repo_for(name))
 
 
 # ---------------------------------------------------------------------------
@@ -188,17 +204,18 @@ def do_models_status():
 
 def do_download_model(name):
     repo = repo_for(name)
+    revision = pinned_revision(name)
     emit({"type": "status", "stage": "downloading",
-          "message": f"下载模型 {name}（{repo}）..."})
+          "message": f"下载模型 {name}（{repo}{' @ ' + revision[:8] if revision else ''}）..."})
     try:
         try:
             from faster_whisper.utils import download_model
 
-            download_model(resolve_model(name))
+            download_model(resolve_model(name), revision=revision)
         except ImportError:
             from huggingface_hub import snapshot_download
 
-            snapshot_download(repo)
+            snapshot_download(repo, revision=revision)
         emit({"type": "done", "model": name})
         return 0
     except Exception as exc:  # noqa: BLE001
@@ -444,9 +461,14 @@ def do_transcribe(args):
     model_id = resolve_model(args.model)
     device = args.device
     compute_type = args.compute_type
+    # 第三方仓库锁定 revision：上游权重被替换时不会静默生效（官方仓库为 None）
+    revision = pinned_revision(args.model)
+    if revision:
+        emit({"type": "status", "stage": "loading_model",
+              "message": f"模型来源 {repo_for(args.model)} @ {revision[:8]}（已锁定版本）"})
 
     try:
-        model = WhisperModel(model_id, device=device, compute_type=compute_type)
+        model = WhisperModel(model_id, device=device, compute_type=compute_type, revision=revision)
     except Exception as exc:  # noqa: BLE001
         # GPU 初始化失败时，可选地回退到 CPU（int8），避免完全不可用
         if device == "cuda" and args.cpu_fallback:
@@ -455,7 +477,7 @@ def do_transcribe(args):
                   "message": "GPU 初始化失败，已回退到 CPU（速度会明显变慢）。"})
             device, compute_type = "cpu", "int8"
             try:
-                model = WhisperModel(model_id, device=device, compute_type=compute_type)
+                model = WhisperModel(model_id, device=device, compute_type=compute_type, revision=revision)
             except Exception as cpu_exc:  # noqa: BLE001
                 # CPU 回退也失败时，原始 GPU 错误才是真正可诊断的信息，必须一并带出
                 raise RuntimeError(
