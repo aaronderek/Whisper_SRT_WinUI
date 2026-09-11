@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType><xsd:choice maxOccurs="unbounded">
+        <xsd:element name="metadata"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" use="required" type="xsd:string" /><xsd:attribute name="type" type="xsd:string" /><xsd:attribute name="mimetype" type="xsd:string" /><xsd:attribute ref="xml:space" /></xsd:complexType></xsd:element>
+        <xsd:element name="assembly"><xsd:complexType><xsd:attribute name="alias" type="xsd:string" /><xsd:attribute name="name" type="xsd:string" /></xsd:complexType></xsd:element>
+        <xsd:element name="data"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /><xsd:element name="comment" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" /><xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" /><xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" /><xsd:attribute ref="xml:space" /></xsd:complexType></xsd:element>
+        <xsd:element name="resheader"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" type="xsd:string" use="required" /></xsd:complexType></xsd:element>
+      </xsd:choice></xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="MainWindow.Title" xml:space="preserve"><value>Whisper 字幕生成器</value></data>
+  <data name="AppTitle.Text" xml:space="preserve"><value>Whisper 字幕生成器</value></data>
+  <data name="DropTitle.Text" xml:space="preserve"><value>拖入视频或音频文件</value></data>
+  <data name="DropSubtitle.Text" xml:space="preserve"><value>支持 mp4 / mkv / mov / mp3 / wav 等常见格式</value></data>
+  <data name="BrowseFilesButton.Content" xml:space="preserve"><value>选择文件…</value></data>
+  <data name="QueueTitle.Text" xml:space="preserve"><value>任务队列</value></data>
+  <data name="ClearButton.Content" xml:space="preserve"><value>清空</value></data>
+  <data name="OpenOutputButton.Content" xml:space="preserve"><value>打开</value></data>
+  <data name="QueueEmptyTitle.Text" xml:space="preserve"><value>队列为空</value></data>
+  <data name="QueueEmptySubtitle.Text" xml:space="preserve"><value>从上方拖入或选择文件</value></data>
+  <data name="ModelSectionTitle.Text" xml:space="preserve"><value>模型</value></data>
+  <data name="TaskLanguageTitle.Text" xml:space="preserve"><value>语言 / 任务</value></data>
+  <data name="TranslateToggle.Header" xml:space="preserve"><value>翻译成英文（translate）</value></data>
+  <data name="OutputLocationTitle.Text" xml:space="preserve"><value>输出位置</value></data>
+  <data name="OutputSameFolder.Content" xml:space="preserve"><value>与源文件相同目录</value></data>
+  <data name="OutputCustomFolder.Content" xml:space="preserve"><value>自定义目录…</value></data>
+  <data name="OutputFolderTextBox.PlaceholderText" xml:space="preserve"><value>未选择</value></data>
+  <data name="BrowseOutputButton.Content" xml:space="preserve"><value>浏览</value></data>
+  <data name="AdvancedSettingsExpander.Header" xml:space="preserve"><value>高级设置</value></data>
+  <data name="ComputeTypeTitle.Text" xml:space="preserve"><value>计算精度</value></data>
+  <data name="ComputeTypeHint.Text" xml:space="preserve"><value>RTX 50 系显卡请用 float16；int8 系列可能触发 cuBLAS 错误。</value></data>
+  <data name="BeamSizeBox.Header" xml:space="preserve"><value>Beam size（越大越准越慢）</value></data>
+  <data name="MaxLineCharsBox.Header" xml:space="preserve"><value>每行最大字符（0 = 不换行）</value></data>
+  <data name="VadToggle.Header" xml:space="preserve"><value>VAD 静音过滤（推荐开启）</value></data>
+  <data name="WordTimestampsToggle.Header" xml:space="preserve"><value>词级时间戳（更慢）</value></data>
+  <data name="TranscriptOnlyToggle.Header" xml:space="preserve"><value>仅输出纯文本文稿（无时间码）</value></data>
+  <data name="TranscriptOnlyToggle.OnContent" xml:space="preserve"><value>输出 .txt 文稿</value></data>
+  <data name="TranscriptOnlyToggle.OffContent" xml:space="preserve"><value>输出 .srt 字幕</value></data>
+  <data name="TranscriptOnlyHint.Text" xml:space="preserve"><value>开启后只生成不带时间码的 .txt 文稿：按句末标点合并成自然段落，每段一行，适合阅读或交给 AI 处理；关闭则照常输出 .srt 字幕。</value></data>
+  <data name="RuntimeSectionTitle.Text" xml:space="preserve"><value>运行环境</value></data>
+  <data name="RecheckButton.Content" xml:space="preserve"><value>重新检测</value></data>
+  <data name="OpenSetupButton.Content" xml:space="preserve"><value>打开安装脚本</value></data>
+  <data name="LogExpander.Header" xml:space="preserve"><value>运行日志</value></data>
+  <data name="SettingsButtonText.Text" xml:space="preserve"><value>设置</value></data>
+  <data name="StartButtonText.Text" xml:space="preserve"><value>开始生成</value></data>
+  <data name="CancelButton.Content" xml:space="preserve"><value>取消</value></data>
+  <data name="SettingsDialog.Title" xml:space="preserve"><value>设置</value></data>
+  <data name="SettingsDialog.CloseButtonText" xml:space="preserve"><value>关闭</value></data>
+  <data name="AppLanguageTitle.Text" xml:space="preserve"><value>应用语言</value></data>
+  <data name="LanguageSystem.Content" xml:space="preserve"><value>跟随系统</value></data>
+  <data name="LanguageChinese.Content" xml:space="preserve"><value>中文（简体）</value></data>
+  <data name="LanguageEnglish.Content" xml:space="preserve"><value>English</value></data>
+  <data name="AppLanguageHint.Text" xml:space="preserve"><value>切换后界面会立即重新载入；“跟随系统”使用 Windows 显示语言。</value></data>
+  <data name="SettingsRuntimeTitle.Text" xml:space="preserve"><value>运行环境</value></data>
+  <data name="InstallDependenciesButton.Content" xml:space="preserve"><value>一键安装 / 修复依赖</value></data>
+  <data name="CancelEnvButton.Content" xml:space="preserve"><value>取消</value></data>
+  <data name="InstallDependenciesHint.Text" xml:space="preserve"><value>依赖安装到 %LOCALAPPDATA%\WhisperSubtitler\backend\.venv，首次需下载数百 MB～数 GB 的 CUDA 运行库。详细进度见主界面的“运行日志”。</value></data>
+  <data name="ComputeDeviceTitle.Text" xml:space="preserve"><value>计算设备</value></data>
+  <data name="ComputeDeviceToggle.OnContent" xml:space="preserve"><value>GPU（CUDA · 推荐）</value></data>
+  <data name="ComputeDeviceToggle.OffContent" xml:space="preserve"><value>CPU（速度很慢）</value></data>
+  <data name="ModelManagementTitle.Text" xml:space="preserve"><value>模型管理</value></data>
+  <data name="RefreshModelsButton.Content" xml:space="preserve"><value>刷新</value></data>
+  <data name="OpenCacheButton.Content" xml:space="preserve"><value>打开缓存目录</value></data>
+  <data name="ModelManagementHint.Text" xml:space="preserve"><value>转录时若模型不存在会自动下载；这里可以提前下载，或删除不用的模型释放磁盘空间。</value></data>
+  <data name="BackendRequiredHint.Text" xml:space="preserve"><value>后端就绪后才能管理模型。</value></data>
+  <data name="DownloadModelButton.Content" xml:space="preserve"><value>下载</value></data>
+  <data name="DeleteModelButton.Content" xml:space="preserve"><value>删除</value></data>
+  <data name="DragAddToQueue" xml:space="preserve"><value>添加到队列</value></data>
+  <data name="StatusWaiting" xml:space="preserve"><value>等待中</value></data>
+  <data name="ModelLargeDisplay" xml:space="preserve"><value>large-v3（质量最高 · 推荐）</value></data>
+  <data name="ModelLargeNote" xml:space="preserve"><value>英文质量最高，float16 约 6GB 显存，速度中等。质量优先首选。</value></data>
+  <data name="ModelTurboDisplay" xml:space="preserve"><value>large-v3-turbo（更快）</value></data>
+  <data name="ModelTurboNote" xml:space="preserve"><value>约 4 倍速，质量仅降约 0.3% WER；口音/嘈杂场景略逊。</value></data>
+  <data name="ModelDistilDisplay" xml:space="preserve"><value>distil-large-v3.5（英文专用 · 快）</value></data>
+  <data name="ModelDistilNote" xml:space="preserve"><value>英文专用，比 turbo 更快，英文 WER 接近 large-v3。</value></data>
+  <data name="ModelMediumDisplay" xml:space="preserve"><value>medium（更省显存）</value></data>
+  <data name="ModelMediumNote" xml:space="preserve"><value>更快更省显存，质量低于 large 系列。</value></data>
+  <data name="LanguageAuto" xml:space="preserve"><value>自动检测</value></data>
+  <data name="StatusIdle" xml:space="preserve"><value>拖入文件即可开始</value></data>
+  <data name="StatusPreparing" xml:space="preserve"><value>准备中…</value></data>
+  <data name="StatusTranscribingFile" xml:space="preserve"><value>转录 {0}</value></data>
+  <data name="StatusTranscribingProgress" xml:space="preserve"><value>转录中 {0:0.#}%</value></data>
+  <data name="StatusFailed" xml:space="preserve"><value>失败</value></data>
+  <data name="LogException" xml:space="preserve"><value>[异常] {0}</value></data>
+  <data name="StatusCanceled" xml:space="preserve"><value>已取消</value></data>
+  <data name="StatusAllFinished" xml:space="preserve"><value>全部任务结束</value></data>
+  <data name="StatusCompleteSpeed" xml:space="preserve"><value>完成 · {0} 条字幕 · {1:0.#}× 实时</value></data>
+  <data name="StatusComplete" xml:space="preserve"><value>完成 · {0} 条字幕</value></data>
+  <data name="StatusCompleteTranscriptSpeed" xml:space="preserve"><value>完成 · {0} 段文稿 · {1:0.#}× 实时</value></data>
+  <data name="StatusCompleteTranscript" xml:space="preserve"><value>完成 · {0} 段文稿</value></data>
+  <data name="LogError" xml:space="preserve"><value>[错误] {0}</value></data>
+  <data name="StatusCanceling" xml:space="preserve"><value>正在取消…</value></data>
+  <data name="BackendChecking" xml:space="preserve"><value>正在检测后端…</value></data>
+  <data name="BackendScriptMissing" xml:space="preserve"><value>未找到 backend\transcribe.py，请确认工程目录完整。</value></data>
+  <data name="PythonMissing" xml:space="preserve"><value>未找到 Python 环境，请先运行 backend\setup.bat。</value></data>
+  <data name="DependenciesNotReady" xml:space="preserve"><value>依赖未就绪：{0}（请运行 setup.bat）</value></data>
+  <data name="Unknown" xml:space="preserve"><value>未知</value></data>
+  <data name="GpuDevice" xml:space="preserve"><value>GPU：{0}</value></data>
+  <data name="BackendReady" xml:space="preserve"><value>就绪 · faster-whisper {0} · CTranslate2 {1}</value></data>
+  <data name="CudaNotDetected" xml:space="preserve"><value>未检测到 CUDA GPU（将使用 CPU，速度很慢）</value></data>
+  <data name="BackendReadyCpu" xml:space="preserve"><value>就绪（CPU 模式）· faster-whisper {0}</value></data>
+  <data name="BackendCheckFailed" xml:space="preserve"><value>检测失败：{0}</value></data>
+  <data name="InstallBackendMissing" xml:space="preserve"><value>未找到 backend\transcribe.py，无法安装。</value></data>
+  <data name="InstallStarting" xml:space="preserve"><value>开始安装…</value></data>
+  <data name="InstallCompleteRechecking" xml:space="preserve"><value>依赖安装完成，正在重新检测…</value></data>
+  <data name="DependenciesReady" xml:space="preserve"><value>依赖已就绪 ✓</value></data>
+  <data name="InstallCompleteCheckFailed" xml:space="preserve"><value>安装完成，但检测未通过：{0}</value></data>
+  <data name="InstallFailed" xml:space="preserve"><value>安装失败。</value></data>
+  <data name="LogInstallFailed" xml:space="preserve"><value>[安装失败] {0}</value></data>
+  <data name="InstallCanceled" xml:space="preserve"><value>安装已取消。</value></data>
+  <data name="InstallException" xml:space="preserve"><value>安装异常：{0}</value></data>
+  <data name="LogInstallException" xml:space="preserve"><value>[安装异常] {0}</value></data>
+  <data name="LogModelsFailed" xml:space="preserve"><value>[模型] 获取状态失败：{0}</value></data>
+  <data name="NotDownloaded" xml:space="preserve"><value>未下载</value></data>
+  <data name="ModelDownloading" xml:space="preserve"><value>下载中…（首次可能数 GB，进度见运行日志）</value></data>
+  <data name="ModelDownloadFailed" xml:space="preserve"><value>下载失败：{0}</value></data>
+  <data name="LogModelDownload" xml:space="preserve"><value>[模型下载] {0}</value></data>
+  <data name="ModelDeleting" xml:space="preserve"><value>删除中…</value></data>
+  <data name="ModelDeleteFailed" xml:space="preserve"><value>删除失败：{0}</value></data>
+  <data name="PythonBackendStartFailed" xml:space="preserve"><value>无法启动 Python 后端：{0}</value></data>
+  <data name="DetectedLanguage" xml:space="preserve"><value>检测语言 {0} · 时长 {1}</value></data>
+  <data name="BackendExitedNoDone" xml:space="preserve"><value>后端异常退出（code {0}），未收到完成信号。</value></data>
+  <data name="PythonStartFailed" xml:space="preserve"><value>无法启动 Python：{0}</value></data>
+  <data name="BackendNoCheckResult" xml:space="preserve"><value>后端未返回检测结果（python 退出码 {0}）。{1}</value></data>
+  <data name="BackendNoModelList" xml:space="preserve"><value>后端未返回模型列表。</value></data>
+  <data name="Canceled" xml:space="preserve"><value>已取消</value></data>
+  <data name="BackendNoDone" xml:space="preserve"><value>后端未返回完成信号。</value></data>
+  <data name="BackendExited" xml:space="preserve"><value>后端异常退出。</value></data>
+  <data name="RequirementsMissing" xml:space="preserve"><value>未找到 {0}</value></data>
+  <data name="SystemPythonMissing" xml:space="preserve"><value>未找到系统 Python。请先安装 64 位 Python 3.10-3.12 并勾选 “Add to PATH”（python.org/downloads/windows），然后重试。</value></data>
+  <data name="CreatingVenv" xml:space="preserve"><value>创建虚拟环境 .venv ...</value></data>
+  <data name="CreateVenvFailed" xml:space="preserve"><value>创建虚拟环境失败：{0}</value></data>
+  <data name="VenvPythonMissing" xml:space="preserve"><value>虚拟环境创建后仍未找到 .venv\Scripts\python.exe。</value></data>
+  <data name="UpgradingPip" xml:space="preserve"><value>升级 pip ...</value></data>
+  <data name="InstallingDependencies" xml:space="preserve"><value>安装依赖（首次需下载数 GB CUDA 运行库，请耐心等待）...</value></data>
+  <data name="DependencyInstallFailed" xml:space="preserve"><value>依赖安装失败：{0}</value></data>
+  <data name="ProcessStartFailed" xml:space="preserve"><value>无法启动 {0}：{1}</value></data>
+  <data name="ExitCode" xml:space="preserve"><value>退出码 {0}</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>Whisper 字幕生成器</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>用 Whisper 从视频或音频提取字幕并导出 SRT 文件</value></data>
+  <data name="AppShortName" xml:space="preserve"><value>Whisper字幕</value></data>
+  <data name="WindowTitle" xml:space="preserve"><value>Whisper 字幕生成器</value></data>
+</root>

@@ -1,0 +1,20 @@
+# 默认按文本处理并统一换行符（仓库内 LF，Windows 检出 CRLF）
+* text=auto
+
+# Windows 脚本与解决方案文件保持 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.sln text eol=crlf
+*.csproj text eol=crlf
+
+# Python 与脚本保持 LF
+*.py text eol=lf
+*.sh text eol=lf
+
+# 二进制资源不要做任何转换
+*.png binary
+*.ico binary
+*.jpg binary
+*.cer binary
+*.msix binary

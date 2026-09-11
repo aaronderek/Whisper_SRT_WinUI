@@ -1,0 +1,25 @@
+# Visual Studio / .NET
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.log
+
+# 打包产物（build-msix.ps1 的输出，含历次 msix，体积很大）
+packaging/build/
+AppPackages/
+*.msix
+*.appx
+*.pfx
+
+# Python 后端
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 杂项
+.claude/
+.DS_Store
+Thumbs.db

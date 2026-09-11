@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType><xsd:choice maxOccurs="unbounded">
+        <xsd:element name="metadata"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" use="required" type="xsd:string" /><xsd:attribute name="type" type="xsd:string" /><xsd:attribute name="mimetype" type="xsd:string" /><xsd:attribute ref="xml:space" /></xsd:complexType></xsd:element>
+        <xsd:element name="assembly"><xsd:complexType><xsd:attribute name="alias" type="xsd:string" /><xsd:attribute name="name" type="xsd:string" /></xsd:complexType></xsd:element>
+        <xsd:element name="data"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /><xsd:element name="comment" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" /><xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" /><xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" /><xsd:attribute ref="xml:space" /></xsd:complexType></xsd:element>
+        <xsd:element name="resheader"><xsd:complexType><xsd:sequence><xsd:element name="value" type="xsd:string" minOccurs="0" /></xsd:sequence><xsd:attribute name="name" type="xsd:string" use="required" /></xsd:complexType></xsd:element>
+      </xsd:choice></xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="MainWindow.Title" xml:space="preserve"><value>Whisper Subtitle Generator</value></data>
+  <data name="AppTitle.Text" xml:space="preserve"><value>Whisper Subtitle Generator</value></data>
+  <data name="DropTitle.Text" xml:space="preserve"><value>Drop video or audio files here</value></data>
+  <data name="DropSubtitle.Text" xml:space="preserve"><value>Supports mp4, mkv, mov, mp3, wav, and other common formats</value></data>
+  <data name="BrowseFilesButton.Content" xml:space="preserve"><value>Choose files…</value></data>
+  <data name="QueueTitle.Text" xml:space="preserve"><value>Task queue</value></data>
+  <data name="ClearButton.Content" xml:space="preserve"><value>Clear</value></data>
+  <data name="OpenOutputButton.Content" xml:space="preserve"><value>Open</value></data>
+  <data name="QueueEmptyTitle.Text" xml:space="preserve"><value>Queue is empty</value></data>
+  <data name="QueueEmptySubtitle.Text" xml:space="preserve"><value>Drop or choose files above</value></data>
+  <data name="ModelSectionTitle.Text" xml:space="preserve"><value>Model</value></data>
+  <data name="TaskLanguageTitle.Text" xml:space="preserve"><value>Language / task</value></data>
+  <data name="TranslateToggle.Header" xml:space="preserve"><value>Translate to English</value></data>
+  <data name="OutputLocationTitle.Text" xml:space="preserve"><value>Output location</value></data>
+  <data name="OutputSameFolder.Content" xml:space="preserve"><value>Same folder as source file</value></data>
+  <data name="OutputCustomFolder.Content" xml:space="preserve"><value>Custom folder…</value></data>
+  <data name="OutputFolderTextBox.PlaceholderText" xml:space="preserve"><value>Not selected</value></data>
+  <data name="BrowseOutputButton.Content" xml:space="preserve"><value>Browse</value></data>
+  <data name="AdvancedSettingsExpander.Header" xml:space="preserve"><value>Advanced settings</value></data>
+  <data name="ComputeTypeTitle.Text" xml:space="preserve"><value>Compute precision</value></data>
+  <data name="ComputeTypeHint.Text" xml:space="preserve"><value>Use float16 on RTX 50-series GPUs; int8 modes may cause cuBLAS errors.</value></data>
+  <data name="BeamSizeBox.Header" xml:space="preserve"><value>Beam size (larger is more accurate but slower)</value></data>
+  <data name="MaxLineCharsBox.Header" xml:space="preserve"><value>Maximum characters per line (0 = no wrapping)</value></data>
+  <data name="VadToggle.Header" xml:space="preserve"><value>VAD silence filtering (recommended)</value></data>
+  <data name="WordTimestampsToggle.Header" xml:space="preserve"><value>Word-level timestamps (slower)</value></data>
+  <data name="TranscriptOnlyToggle.Header" xml:space="preserve"><value>Plain-text transcript only (no timecodes)</value></data>
+  <data name="TranscriptOnlyToggle.OnContent" xml:space="preserve"><value>Output .txt transcript</value></data>
+  <data name="TranscriptOnlyToggle.OffContent" xml:space="preserve"><value>Output .srt subtitles</value></data>
+  <data name="TranscriptOnlyHint.Text" xml:space="preserve"><value>When on, only a .txt transcript is written: sentences are merged into natural paragraphs (one per line) with no timecodes — handy for reading or feeding to an AI. Turn it off to produce .srt subtitles as usual.</value></data>
+  <data name="RuntimeSectionTitle.Text" xml:space="preserve"><value>Runtime environment</value></data>
+  <data name="RecheckButton.Content" xml:space="preserve"><value>Check again</value></data>
+  <data name="OpenSetupButton.Content" xml:space="preserve"><value>Open setup script</value></data>
+  <data name="LogExpander.Header" xml:space="preserve"><value>Runtime log</value></data>
+  <data name="SettingsButtonText.Text" xml:space="preserve"><value>Settings</value></data>
+  <data name="StartButtonText.Text" xml:space="preserve"><value>Generate subtitles</value></data>
+  <data name="CancelButton.Content" xml:space="preserve"><value>Cancel</value></data>
+  <data name="SettingsDialog.Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="SettingsDialog.CloseButtonText" xml:space="preserve"><value>Close</value></data>
+  <data name="AppLanguageTitle.Text" xml:space="preserve"><value>App language</value></data>
+  <data name="LanguageSystem.Content" xml:space="preserve"><value>Use system language</value></data>
+  <data name="LanguageChinese.Content" xml:space="preserve"><value>中文（简体）</value></data>
+  <data name="LanguageEnglish.Content" xml:space="preserve"><value>English</value></data>
+  <data name="AppLanguageHint.Text" xml:space="preserve"><value>The interface reloads immediately after switching. “Use system language” follows the Windows display language.</value></data>
+  <data name="SettingsRuntimeTitle.Text" xml:space="preserve"><value>Runtime environment</value></data>
+  <data name="InstallDependenciesButton.Content" xml:space="preserve"><value>Install / repair dependencies</value></data>
+  <data name="CancelEnvButton.Content" xml:space="preserve"><value>Cancel</value></data>
+  <data name="InstallDependenciesHint.Text" xml:space="preserve"><value>Dependencies are installed to %LOCALAPPDATA%\WhisperSubtitler\backend\.venv. The first setup may download hundreds of MB to several GB of CUDA runtime files. See “Runtime log” on the main screen for details.</value></data>
+  <data name="ComputeDeviceTitle.Text" xml:space="preserve"><value>Compute device</value></data>
+  <data name="ComputeDeviceToggle.OnContent" xml:space="preserve"><value>GPU (CUDA · recommended)</value></data>
+  <data name="ComputeDeviceToggle.OffContent" xml:space="preserve"><value>CPU (very slow)</value></data>
+  <data name="ModelManagementTitle.Text" xml:space="preserve"><value>Model management</value></data>
+  <data name="RefreshModelsButton.Content" xml:space="preserve"><value>Refresh</value></data>
+  <data name="OpenCacheButton.Content" xml:space="preserve"><value>Open cache folder</value></data>
+  <data name="ModelManagementHint.Text" xml:space="preserve"><value>Missing models are downloaded automatically during transcription. You can download them in advance or delete unused models to free disk space.</value></data>
+  <data name="BackendRequiredHint.Text" xml:space="preserve"><value>The backend must be ready before models can be managed.</value></data>
+  <data name="DownloadModelButton.Content" xml:space="preserve"><value>Download</value></data>
+  <data name="DeleteModelButton.Content" xml:space="preserve"><value>Delete</value></data>
+  <data name="DragAddToQueue" xml:space="preserve"><value>Add to queue</value></data>
+  <data name="StatusWaiting" xml:space="preserve"><value>Waiting</value></data>
+  <data name="ModelLargeDisplay" xml:space="preserve"><value>large-v3 (highest quality · recommended)</value></data>
+  <data name="ModelLargeNote" xml:space="preserve"><value>Best English quality. Uses about 6 GB of VRAM with float16 and runs at moderate speed. Recommended when quality matters most.</value></data>
+  <data name="ModelTurboDisplay" xml:space="preserve"><value>large-v3-turbo (faster)</value></data>
+  <data name="ModelTurboNote" xml:space="preserve"><value>About 4× faster with only around 0.3% higher WER; slightly weaker with accents or noisy audio.</value></data>
+  <data name="ModelDistilDisplay" xml:space="preserve"><value>distil-large-v3.5 (English only · fast)</value></data>
+  <data name="ModelDistilNote" xml:space="preserve"><value>English-only and faster than turbo, with English WER close to large-v3.</value></data>
+  <data name="ModelMediumDisplay" xml:space="preserve"><value>medium (lower VRAM use)</value></data>
+  <data name="ModelMediumNote" xml:space="preserve"><value>Faster and more memory-efficient, with lower quality than the large models.</value></data>
+  <data name="LanguageAuto" xml:space="preserve"><value>Auto-detect</value></data>
+  <data name="StatusIdle" xml:space="preserve"><value>Drop files to get started</value></data>
+  <data name="StatusPreparing" xml:space="preserve"><value>Preparing…</value></data>
+  <data name="StatusTranscribingFile" xml:space="preserve"><value>Transcribing {0}</value></data>
+  <data name="StatusTranscribingProgress" xml:space="preserve"><value>Transcribing {0:0.#}%</value></data>
+  <data name="StatusFailed" xml:space="preserve"><value>Failed</value></data>
+  <data name="LogException" xml:space="preserve"><value>[Exception] {0}</value></data>
+  <data name="StatusCanceled" xml:space="preserve"><value>Canceled</value></data>
+  <data name="StatusAllFinished" xml:space="preserve"><value>All tasks finished</value></data>
+  <data name="StatusCompleteSpeed" xml:space="preserve"><value>Complete · {0} subtitles · {1:0.#}× real time</value></data>
+  <data name="StatusComplete" xml:space="preserve"><value>Complete · {0} subtitles</value></data>
+  <data name="StatusCompleteTranscriptSpeed" xml:space="preserve"><value>Complete · {0} paragraphs · {1:0.#}× real time</value></data>
+  <data name="StatusCompleteTranscript" xml:space="preserve"><value>Complete · {0} paragraphs</value></data>
+  <data name="LogError" xml:space="preserve"><value>[Error] {0}</value></data>
+  <data name="StatusCanceling" xml:space="preserve"><value>Canceling…</value></data>
+  <data name="BackendChecking" xml:space="preserve"><value>Checking backend…</value></data>
+  <data name="BackendScriptMissing" xml:space="preserve"><value>backend\transcribe.py was not found. Make sure the project files are complete.</value></data>
+  <data name="PythonMissing" xml:space="preserve"><value>No Python environment was found. Run backend\setup.bat first.</value></data>
+  <data name="DependenciesNotReady" xml:space="preserve"><value>Dependencies are not ready: {0} (run setup.bat)</value></data>
+  <data name="Unknown" xml:space="preserve"><value>unknown</value></data>
+  <data name="GpuDevice" xml:space="preserve"><value>GPU: {0}</value></data>
+  <data name="BackendReady" xml:space="preserve"><value>Ready · faster-whisper {0} · CTranslate2 {1}</value></data>
+  <data name="CudaNotDetected" xml:space="preserve"><value>No CUDA GPU detected (CPU mode will be used and is very slow)</value></data>
+  <data name="BackendReadyCpu" xml:space="preserve"><value>Ready (CPU mode) · faster-whisper {0}</value></data>
+  <data name="BackendCheckFailed" xml:space="preserve"><value>Backend check failed: {0}</value></data>
+  <data name="InstallBackendMissing" xml:space="preserve"><value>backend\transcribe.py was not found, so dependencies cannot be installed.</value></data>
+  <data name="InstallStarting" xml:space="preserve"><value>Starting installation…</value></data>
+  <data name="InstallCompleteRechecking" xml:space="preserve"><value>Dependencies installed. Checking again…</value></data>
+  <data name="DependenciesReady" xml:space="preserve"><value>Dependencies are ready ✓</value></data>
+  <data name="InstallCompleteCheckFailed" xml:space="preserve"><value>Installation finished, but the check failed: {0}</value></data>
+  <data name="InstallFailed" xml:space="preserve"><value>Installation failed.</value></data>
+  <data name="LogInstallFailed" xml:space="preserve"><value>[Install failed] {0}</value></data>
+  <data name="InstallCanceled" xml:space="preserve"><value>Installation canceled.</value></data>
+  <data name="InstallException" xml:space="preserve"><value>Installation error: {0}</value></data>
+  <data name="LogInstallException" xml:space="preserve"><value>[Install error] {0}</value></data>
+  <data name="LogModelsFailed" xml:space="preserve"><value>[Models] Could not get status: {0}</value></data>
+  <data name="NotDownloaded" xml:space="preserve"><value>Not downloaded</value></data>
+  <data name="ModelDownloading" xml:space="preserve"><value>Downloading… (the first download may be several GB; see Runtime log for progress)</value></data>
+  <data name="ModelDownloadFailed" xml:space="preserve"><value>Download failed: {0}</value></data>
+  <data name="LogModelDownload" xml:space="preserve"><value>[Model download] {0}</value></data>
+  <data name="ModelDeleting" xml:space="preserve"><value>Deleting…</value></data>
+  <data name="ModelDeleteFailed" xml:space="preserve"><value>Delete failed: {0}</value></data>
+  <data name="PythonBackendStartFailed" xml:space="preserve"><value>Could not start the Python backend: {0}</value></data>
+  <data name="DetectedLanguage" xml:space="preserve"><value>Detected language {0} · duration {1}</value></data>
+  <data name="BackendExitedNoDone" xml:space="preserve"><value>The backend exited unexpectedly (code {0}) without a completion signal.</value></data>
+  <data name="PythonStartFailed" xml:space="preserve"><value>Could not start Python: {0}</value></data>
+  <data name="BackendNoCheckResult" xml:space="preserve"><value>The backend returned no check result (Python exit code {0}).{1}</value></data>
+  <data name="BackendNoModelList" xml:space="preserve"><value>The backend returned no model list.</value></data>
+  <data name="Canceled" xml:space="preserve"><value>Canceled</value></data>
+  <data name="BackendNoDone" xml:space="preserve"><value>The backend returned no completion signal.</value></data>
+  <data name="BackendExited" xml:space="preserve"><value>The backend exited unexpectedly.</value></data>
+  <data name="RequirementsMissing" xml:space="preserve"><value>Could not find {0}</value></data>
+  <data name="SystemPythonMissing" xml:space="preserve"><value>No system Python was found. Install 64-bit Python 3.10–3.12, select “Add to PATH” (python.org/downloads/windows), and try again.</value></data>
+  <data name="CreatingVenv" xml:space="preserve"><value>Creating virtual environment .venv ...</value></data>
+  <data name="CreateVenvFailed" xml:space="preserve"><value>Could not create the virtual environment: {0}</value></data>
+  <data name="VenvPythonMissing" xml:space="preserve"><value>The virtual environment was created, but .venv\Scripts\python.exe is still missing.</value></data>
+  <data name="UpgradingPip" xml:space="preserve"><value>Upgrading pip ...</value></data>
+  <data name="InstallingDependencies" xml:space="preserve"><value>Installing dependencies (the first setup downloads several GB of CUDA runtime files; please wait)...</value></data>
+  <data name="DependencyInstallFailed" xml:space="preserve"><value>Dependency installation failed: {0}</value></data>
+  <data name="ProcessStartFailed" xml:space="preserve"><value>Could not start {0}: {1}</value></data>
+  <data name="ExitCode" xml:space="preserve"><value>Exit code {0}</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>Whisper Subtitle Generator</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>Extract subtitles from video or audio with Whisper and export SRT files</value></data>
+  <data name="AppShortName" xml:space="preserve"><value>Whisper Subtitles</value></data>
+  <data name="WindowTitle" xml:space="preserve"><value>Whisper Subtitle Generator</value></data>
+</root>

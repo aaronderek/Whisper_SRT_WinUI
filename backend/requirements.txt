@@ -1,0 +1,14 @@
+# faster-whisper 转录后端依赖
+# 目标硬件：RTX 50 系 (Blackwell / sm_120)，需要 CUDA 12 + cuDNN 9。
+#
+# 说明：
+#  - ctranslate2 >= 4.5.0 才包含对 Blackwell 的支持（修复 INT8 tensor core padding）。
+#  - nvidia-cublas-cu12 / nvidia-cudnn-cu12 提供 GPU 运行所需的 CUDA 12 运行库，
+#    transcribe.py 会在启动时自动把它们的 bin 目录加入 DLL 搜索路径。
+#  - av (PyAV) 内置 ffmpeg，可直接从视频中解码音轨，无需单独安装 ffmpeg.exe。
+
+faster-whisper>=1.1.0
+ctranslate2>=4.5.0
+av>=11.0.0
+nvidia-cublas-cu12>=12.4.0
+nvidia-cudnn-cu12>=9.1.0
